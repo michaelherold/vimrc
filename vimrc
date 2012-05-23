@@ -342,6 +342,7 @@ if has("autocmd")
     autocmd filetype python,rst setlocal list
     autocmd filetype ruby setlocal list
     autocmd filetype javascript,css setlocal list
+    autocmd filetype html setlocal list
   augroup end " }}}
 
   augroup vim_files " {{{
@@ -356,50 +357,16 @@ if has("autocmd")
   augroup html_files " {{{
     au!
 
-    " This function detects, based on HTML content, whether this is a
-    " Django template, or a plain HTML file, and sets filetype accordingly
-    fun! s:DetectHTMLVariant()
-      let n = 1
-      while n < 50 && n < line("$")
-        " check for django
-        if getline(n) =~ '{%\s*\(extends\|load\|block\|if\|for\|include\|trans\)\>'
-          set ft=htmldjango.html
-          return
-        endif
-        let n = n + 1
-      endwhile
-      " go with html
-      set ft=html
-    endfun
-
-    autocmd BufNewFile,BufRead *.html,*.htm call s:DetectHTMLVariant()
+    autocmd filetype html,html.ruby,xhtml,xml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
     " Auto-closing of HTML/XML tags
     let g:closetag_default_xml=1
-    autocmd filetype html,htmldjango let b:closetag_html_style=1
-    autocmd filetype html,xhtml,xml source ~/.vim/scripts/closetag.vim
+    autocmd filetype html,html.ruby let b:closetag_html_style=1
+    autocmd filetype html,html.ruby,xhtml,xml source ~/.vim/scripts/closetag.vim
   augroup end " }}}
 
   augroup python_files " {{{
     au!
-
-    " This function detects, based on Python content, whether this is a
-    " Django file, which may enable snippet completion for it
-    fun! s:DetectPythonVariant()
-      let n = 1
-      while n < 50 && n < line("$")
-        " check for django
-        if getline(n) =~ 'import\s\+\<django\>' || getline(n) =~ 'from\s\+\<django\>\s\+import'
-          set ft=python.django
-          "set syntax=python
-          return
-        endif
-        let n = n + 1
-      endwhile
-      " go with normal python
-      set ft=python
-    endfun
-    autocmd BufNewFile,BufRead *.py call s:DetectPythonVariant()
 
     " PEP8 compliance (set 1 tab = 4 chars explicitly, even if set
     " earlier, as it is important)
@@ -442,13 +409,13 @@ if has("autocmd")
   augroup css_files " {{{
     au!
 
-    autocmd filetype css,less setlocal foldmethod=marker foldmarker={,}
+    autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
   augroup end " }}}
 
   augroup javascript_files " {{{
     au!
 
-    autocmd filetype javascript setlocal expandtab
+    autocmd filetype javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
     autocmd filetype javascript setlocal foldmethod=marker foldmarker={,}
   augroup end " }}}
@@ -465,7 +432,7 @@ if has("autocmd")
 endif
 
 " }}}
-" => Extra vi Compatibility
+" => Extra vi Compatibility {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set cpoptions+=$            " when changing a line, don't redisplay, but put
