@@ -388,7 +388,7 @@ if has("autocmd")
     autocmd filetype python imap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
 
     " Run a quick static syntax check every time we save a Python file
-    autocmd BufWritePost *.py call Pyflakes()
+    autocmd BufWritePost *.py call Flake8()
   augroup end " }}}
 
   augroup ruby_files " {{{
@@ -430,6 +430,13 @@ if has("autocmd")
     autocmd filetype textile highlight link frontmatter Comment
   augroup end " }}}
 endif
+
+" }}}
+" => Python mode configuration {{{
+
+" Don't run pylint on every save - handled by Flake8
+let g:pymode_lint = 0
+let g:pymode_lint_write = 0
 
 " }}}
 " => Extra vi Compatibility {{{
