@@ -15,8 +15,8 @@
 	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "vim/bundle/vim-ruby"]
 	path = vim/bundle/vim-ruby
-    url = https://github.com/vim-ruby/vim-ruby.git
-    ignore = dirty
+	url = https://github.com/vim-ruby/vim-ruby.git
+	ignore = dirty
 [submodule "vim/bundle/vim-yankring"]
 	path = vim/bundle/vim-yankring
 	url = https://github.com/chrismetcalf/vim-yankring.git
@@ -37,5 +37,8 @@
 	url = git://github.com/scrooloose/nerdtree.git
 [submodule "vim/bundle/taglist.vim"]
 	path = vim/bundle/taglist.vim
-    url = git://github.com/vim-scripts/taglist.vim.git
-    ignore = dirty
+	url = git://github.com/vim-scripts/taglist.vim.git
+	ignore = dirty
+[submodule "vim/bundle/vim-slim"]
+	path = vim/bundle/vim-slim
+	url = git://github.com/slim-template/vim-slim.git
