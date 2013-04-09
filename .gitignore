@@ -3,6 +3,7 @@
 /vim/.tmp/*
 /vim/.undo/*
 /vim/.VimballRecord
+/vim/NERDTreeBookmarks
 /vim/cache
 /vim/user.vim
 /vim/view
