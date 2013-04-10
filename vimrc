@@ -496,6 +496,12 @@ if has("autocmd")
     autocmd filetype textile syntax region frontmatter start=/\%^---$/ end=/^---$/
     autocmd filetype textile highlight link frontmatter Comment
   augroup end " }}}
+
+  augroup yaml_files " {{{
+    au!
+
+    autocmd filetype yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+  augroup end " }}}
 endif
 
 " }}}
