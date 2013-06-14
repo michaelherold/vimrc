@@ -125,11 +125,11 @@ set history=1000            " remember more commands and search history
 set undolevels=1000         " use many mucho levels of undo
 if v:version >= 730
   set undofile              " keep a persistent backup file
-  set undodir=~/.vim/.undo,~/tmp,/tmp
+  set undodir=~/vimfiles/.undo,~/tmp,/tmp
 endif
 set nobackup                " do not want backup files!!!!!
 set noswapfile              " NO SWAP FILE
-set directory=~/.vim/.tmp,~/tmp,/tmp " set swap location, just in case
+set directory=~/vimfiles/.tmp,~/tmp,/tmp " set swap location, just in case
 set viminfo='20,\"80        " read/write a .viminfo file, don't store more
                             "   than 80 lines of registers
 set wildmenu                " make tab completion for files/buffer bash-like
@@ -260,7 +260,7 @@ nmap <leader>p "+p
 nmap <leader>P "+P
 
 " YankRing stuff
-let g:yankring_history_dir = '$HOME/.vim/.tmp'
+let g:yankring_history_dir = '$HOME/vimfiles/.tmp'
 nmap <leader>r :YRShow<CR>
 
 " Edit the vimrc file
@@ -328,7 +328,7 @@ nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 nnoremap <leader>N :NERDTreeClose<CR>
 
 " Store the bookmarks file
-let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+let NERDTreeBookmarksFile=expand("$HOME/vimfiles/NERDTreeBookmarks")
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=1
@@ -429,7 +429,7 @@ if has("autocmd")
     " Auto-closing of HTML/XML tags
     let g:closetag_default_xml=1
     autocmd filetype html,html.ruby let b:closetag_html_style=1
-    autocmd filetype html,html.ruby,xhtml,xml source ~/.vim/scripts/closetag.vim
+    autocmd filetype html,html.ruby,xhtml,xml source ~/vimfiles/scripts/closetag.vim
   augroup end " }}}
 
   augroup python_files " {{{
@@ -528,7 +528,7 @@ au filetype vim set formatoptions-=o
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Common abbreviations/misspellings
-source ~/.vim/autocorrect.vim
+source ~/vimfiles/autocorrect.vim
 
 " Helper function for search
 function! PulseCursorLine()
