@@ -52,6 +52,11 @@ filetype plugin indent on
 let mapleader = ","
 let g:mapleader = ","
 
+" Set up YankStack - this must be done before any mappings on yanks
+call yankstack#setup()
+nmap <C-p> <Plug>yankstack_substitute_older_paste
+nmap <C-n> <Plug>yankstack_substitute_newer_paste
+
 " }}}
 " => Editing behavior {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
