@@ -43,6 +43,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'slim-template/vim-slim'
+Plugin 'maxbrunsfeld/vim-yankstack'
 
 call vundle#end()
 filetype plugin indent on
@@ -277,10 +278,6 @@ nmap <leader>y "+y
 nmap <leader>Y "+yy
 nmap <leader>p "+p
 nmap <leader>P "+P
-
-" YankRing stuff
-let g:yankring_history_dir = '$HOME/.vim/.tmp'
-nmap <leader>r :YRShow<CR>
 
 " Edit the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
