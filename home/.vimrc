@@ -21,12 +21,31 @@ endfun
 " => General {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Use pathogen to easily modify the runtime path to include all plugins
-" under the ~/.vim/bundle directory
-filetype off                 " force reloading *after* pathogen loaded
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on    " enable detection, plugins, and indenting
+" Use Vundle to manage plugins, see http://github.com/gmarik/Vundle.vim
+
+" Turn off filetype for Vundle
+filetype off
+
+" Set the runtime pathto include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle - required!
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'sjl/gundo.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'slim-template/vim-slim'
+
+call vundle#end()
+filetype plugin indent on
 
 " Set leader to ','
 let mapleader = ","
