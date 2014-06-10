@@ -14,7 +14,7 @@
 set nocompatible
 
 fun! MySys()
-    return "linux"
+  return "linux"
 endfun
 
 " }}}
@@ -177,11 +177,11 @@ nmap <silent> <leader>f :QFix<CR>
 command! -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
   if exists("g:qfix_win") && a:forced == 0
-  	cclose
-  	unlet g:qfix_win
+    cclose
+    unlet g:qfix_win
   else
-  	copen 10
-  	let g:qfix_win = bufnr("$")
+    copen 10
+    let g:qfix_win = bufnr("$")
   endif
 endfunction
 
@@ -220,7 +220,7 @@ endif
 
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 
@@ -374,7 +374,7 @@ let NERDTreeMouseMouse=2
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+                    \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
 
 " }}}
 " => Taglist settings {{{
@@ -558,39 +558,39 @@ source ~/.vim/autocorrect.vim
 
 " Helper function for search
 function! PulseCursorLine()
-    let current_window = winnr()
+  let current_window = winnr()
 
-    windo set nocursorline
-    execute current_window . 'wincmd w'
+  windo set nocursorline
+  execute current_window . 'wincmd w'
 
-    setlocal cursorline
+  setlocal cursorline
 
-    redir => old_hi
-        silent execute 'hi CursorLine'
-    redir END
-    let old_hi = split(old_hi, '\n')[0]
-    let old_hi = substitute(old_hi, 'xxx', '', '')
+  redir => old_hi
+  silent execute 'hi CursorLine'
+  redir END
+  let old_hi = split(old_hi, '\n')[0]
+  let old_hi = substitute(old_hi, 'xxx', '', '')
 
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 20m
+  hi CursorLine guibg=#3a3a3a
+  redraw
+  sleep 20m
 
-    hi CursorLine guibg=#4a4a4a
-    redraw
-    sleep 30m
+  hi CursorLine guibg=#4a4a4a
+  redraw
+  sleep 30m
 
-    hi CursorLine guibg=#3a3a3a
-    redraw
-    sleep 30m
+  hi CursorLine guibg=#3a3a3a
+  redraw
+  sleep 30m
 
-    hi CursorLine guibg=#2a2a2a
-    redraw
-    sleep 20m
+  hi CursorLine guibg=#2a2a2a
+  redraw
+  sleep 20m
 
-    execute 'hi ' . old_hi
+  execute 'hi ' . old_hi
 
-    windo set cursorline
-    execute current_window . 'wincmd w'
+  windo set cursorline
+  execute current_window . 'wincmd w'
 endfunction
 
 " Fix Windows ^M encoding problem
