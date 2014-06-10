@@ -40,7 +40,7 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'bling/vim-airline'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'slim-template/vim-slim'
 Plugin 'maxbrunsfeld/vim-yankstack'
@@ -190,18 +190,18 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if &t_Co > 2 || has("gui_running")
-  syntax on                 " switch syntax highlighting on, when color term
+  syntax on  " switch syntax highlighting on for color term
 endif
 
 if has("gui_running")
-	" Set font according to system
-	if MySys() == "mac"
-    set gfn=Menlo:h14
+  " Set font according to system
+  if MySys() == "mac"
+    set guifont=Menlo:h14
     set shell=/bin/bash
   elseif MySys() == "windows"
-    set gfn=Consolas:h14
+    set guifont=Consolas:h14
   elseif MySys() == "linux"
-    set gfn=Inconsolata\ for\ Powerline\ 15
+    set guifont=Inconsolata:h15
     set shell=/bin/zsh
   endif
 
@@ -214,11 +214,15 @@ if has("gui_running")
   set background=dark
   colorscheme railscat
 else
-    set background=dark
-    colorscheme molokai
+  set background=dark
+  colorscheme molokai
 endif
 
-let g:Powerline_symbols = 'compatible'
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
 
 " }}}
 " => Shortcut Mappings {{{
@@ -440,6 +444,7 @@ if has("autocmd")
     " General help can still be entered manually, with :help
     autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
     autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+    autocmd filetype vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
 
   augroup html_files " {{{
