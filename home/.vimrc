@@ -346,11 +346,7 @@ nnoremap <F5> :GundoToggle<CR>
 " => NERDTree settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Put focus to the NERD Tree with ,n (tricked by quickly closing it and
-" immediately showing it again, since there is no :NERDTreeFocus command)
-nnoremap <leader>n :NERDTreeClose<CR>:NERDTreeToggle<CR>
-nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <leader>N :NERDTreeClose<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " Store the bookmarks file
 let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
