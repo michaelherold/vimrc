@@ -201,7 +201,7 @@ if has("gui_running")
   elseif MySys() == "windows"
     set guifont=Consolas:h14
   elseif MySys() == "linux"
-    set guifont=Inconsolata:h15
+    set guifont=Droid\ Sans\ Mono\ 10
     set shell=/bin/zsh
   endif
 
