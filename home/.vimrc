@@ -51,6 +51,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'Shougo/unite.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'wting/rust.vim'
 
 call vundle#end()
 filetype plugin indent on
