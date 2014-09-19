@@ -66,10 +66,10 @@ let g:mapleader = ","
 
 set showmode                " always show what mode we're in
 set nowrap                  " don't wrap lines
-set tabstop=4               " a tab is four spaces
-set softtabstop=4           " when hitting <BS>, pretend like tab is removed, even if spaces
+set tabstop=2               " a tab is two spaces
+set softtabstop=2           " when hitting <BS>, pretend like tab is removed, even if spaces
 set expandtab               " expand tabs by default (overloadable per file type)
-set shiftwidth=4            " number of spaces to use for auto indenting
+set shiftwidth=2            " number of spaces to use for auto indenting
 set shiftround              " use multiple of shiftwidth when indenting with '>' and '<'
 set smarttab                " insert tabs on line start according to shiftwidth
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
