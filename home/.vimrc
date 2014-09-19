@@ -196,30 +196,8 @@ if &t_Co > 2 || has("gui_running")
   syntax on  " switch syntax highlighting on for color term
 endif
 
-if has("gui_running")
-  " Set font according to system
-  if MySys() == "mac"
-    set guifont=Menlo:h14
-    set shell=/bin/bash
-  elseif MySys() == "windows"
-    set guifont=Consolas:h14
-  elseif MySys() == "linux"
-    set guifont=Droid\ Sans\ Mono\ 10
-    set shell=/bin/zsh
-  endif
-
-  set guioptions-=T        " get rid of the toolbar
-  set guioptions-=l        " get rid of the left scrollbar
-  set guioptions-=L        " get rid of the left scrollbar on v-split
-  set guioptions-=r        " get rid of the right scrollbar
-  set guioptions-=R        " get rid of the right scrollbar on v-split
-  set t_Co=256
-  set background=dark
-  colorscheme railscat
-else
-  set background=dark
-  colorscheme molokai
-endif
+set background=dark
+colorscheme molokai
 
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
