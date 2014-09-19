@@ -327,6 +327,14 @@ nnoremap <leader>v V`]
 nnoremap <F5> :GundoToggle<CR>
 
 " }}}
+" => Command-T Settings {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:CommandTMatchWindowAtTop=1
+let g:CommandTMinHeight=2
+let g:CommandTMaxHeight=10
+
+" }}}
 " => NERDTree settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
