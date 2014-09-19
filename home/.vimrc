@@ -164,7 +164,11 @@ set viminfo='20,\"80        " read/write a .viminfo file, don't store more
 set wildmenu                " make tab completion for files/buffer bash-like
 set wildmode=list:full      " show a list when pressing tab and complete
                             "   first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*.swp,*.bak,*.pyc,*.class
+set wildignore+=tmp/**,*.rbc,*.rbx,*.scssc,*.sassc
+set wildignore+=bundle/**,vendor/bundle/**
+set wildignore+=coverage/**
+set wildignore+=node_modules/**
 
 set title                   " change the terminal's title
 set visualbell              " don't beep
