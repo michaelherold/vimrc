@@ -52,6 +52,7 @@ Plugin 'slim-template/vim-slim'
 Plugin 'nvie/vim-flake8'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'wting/rust.vim'
+Plugin 'tpope/vim-rails'
 
 call vundle#end()
 filetype plugin indent on
