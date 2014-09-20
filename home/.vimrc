@@ -53,6 +53,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-rails'
+Plugin 'nelstrom/vim-markdown-folding'
 
 call vundle#end()
 filetype plugin indent on
