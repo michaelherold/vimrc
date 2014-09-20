@@ -55,6 +55,8 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'tpope/vim-dispatch'
+Plugin 'jgdavey/vim-turbux'
 
 call vundle#end()
 filetype plugin indent on
@@ -370,6 +372,7 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 
 " }}}
 " => Taglist settings {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
 nnoremap <leader>L :TlistClose<CR>
@@ -417,28 +420,13 @@ map <leader>s? z=
 " }}}
 " => Filetype Specific Handling {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 if has("autocmd")
-  augroup invisible_chars " {{{
+  augroup css_files " {{{
     au!
 
-    " Show invisible characters in all of these files
-    autocmd filetype vim setlocal list
-    autocmd filetype python,rst setlocal list
-    autocmd filetype ruby setlocal list
-    autocmd filetype javascript,css setlocal list
-    autocmd filetype html setlocal list
+    autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
   augroup end " }}}
-
-  augroup vim_files " {{{
-    au!
-
-    " Bind <F1> to show the keyword under the cursor
-    " General help can still be entered manually, with :help
-    autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-    autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-    autocmd filetype vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-  augroup end " }}}
-
   augroup html_files " {{{
     au!
 
@@ -449,7 +437,24 @@ if has("autocmd")
     autocmd filetype html,html.ruby let b:closetag_html_style=1
     autocmd filetype html,html.ruby,xhtml,xml source ~/.vim/scripts/closetag.vim
   augroup end " }}}
+  augroup javascript_files " {{{
+    au!
 
+    autocmd filetype javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
+    autocmd filetype javascript setlocal foldmethod=marker foldmarker={,}
+    autocmd filetype javascript call JavaScriptFold()
+  augroup end " }}}
+  augroup invisible_chars " {{{
+    au!
+
+    " Show invisible characters in all of these files
+    autocmd filetype vim setlocal list
+    autocmd filetype python,rst setlocal list
+    autocmd filetype ruby setlocal list
+    autocmd filetype javascript,css setlocal list
+    autocmd filetype html setlocal list
+  augroup end " }}}
   augroup python_files " {{{
     au!
 
@@ -475,13 +480,6 @@ if has("autocmd")
     " Run a quick static syntax check every time we save a Python file
     autocmd BufWritePost *.py call Flake8()
   augroup end " }}}
-
-  augroup ruby_files " {{{
-    au!
-
-    autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-  augroup end " }}}
-
   augroup rst_files " {{{
     au!
 
@@ -490,22 +488,11 @@ if has("autocmd")
     autocmd filetype rst setlocal formatoptions+=nqt
     autocmd filetype rst match ErrorMsg '\%>74v.\+'
   augroup end " }}}
-
-  augroup css_files " {{{
+  augroup ruby_files " {{{
     au!
 
-    autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
+    autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
-
-  augroup javascript_files " {{{
-    au!
-
-    autocmd filetype javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-    autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
-    autocmd filetype javascript setlocal foldmethod=marker foldmarker={,}
-    autocmd filetype javascript call JavaScriptFold()
-  augroup end " }}}
-
   augroup textile_files " {{{
     au!
 
@@ -515,7 +502,15 @@ if has("autocmd")
     autocmd filetype textile syntax region frontmatter start=/\%^---$/ end=/^---$/
     autocmd filetype textile highlight link frontmatter Comment
   augroup end " }}}
+  augroup vim_files " {{{
+    au!
 
+    " Bind <F1> to show the keyword under the cursor
+    " General help can still be entered manually, with :help
+    autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+    autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+    autocmd filetype vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+  augroup end " }}}
   augroup yaml_files " {{{
     au!
 
@@ -525,6 +520,7 @@ endif
 
 " }}}
 " => Python mode configuration {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't run pylint on every save - handled by Flake8
 let g:pymode_lint = 0
