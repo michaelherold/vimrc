@@ -206,7 +206,8 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 set background=dark
-colorscheme molokai
+let base16colorspace=256
+colorscheme base16-railscasts
 
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
