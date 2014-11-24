@@ -333,6 +333,12 @@ nnoremap <leader>v V`]
 " Gundo.vim
 nnoremap <F5> :GundoToggle<CR>
 
+" Command-T
+map <leader>gl :CommandT lib<cr>
+map <leader>gt :CommandTTag<cr>
+map <leader>f :CommandT<cr>
+map <leader>F :CommandT %%<cr>
+
 " }}}
 " => Command-T Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
