@@ -57,6 +57,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'tpope/vim-dispatch'
 Plugin 'jgdavey/vim-turbux'
+Plugin 'othree/html5.vim'
 
 call vundle#end()
 filetype plugin indent on
