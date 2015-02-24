@@ -458,6 +458,11 @@ if has("autocmd")
     autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
     autocmd filetype vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
+  augroup whitespace_chars " {{{
+    autocmd!
+
+    autocmd BufWritePre *.* :call <SID>StripTrailingWhitespace()
+  augroup end " }}}
   augroup yaml_files " {{{
     autocmd!
 
@@ -531,6 +536,16 @@ endfunction
 
 " Fix Windows ^M encoding problem
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Strips trailing whitespace at the end of lines
+function! <SID>StripTrailingWhitespace()
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call cursor(l, c)
+endfunction
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
