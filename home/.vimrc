@@ -24,7 +24,7 @@ endfunction
 filetype off
 
 " Set the runtime pathto include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Let Vundle manage Vundle - required!
@@ -89,7 +89,7 @@ set nolist                  " don't show invisible characters by default
 
 set mouse=a                 " enable using the mouse if terminal emulator supports it
 
-set ffs=unix,dos,mac        " ordering of file formats
+set fileformats=unix,dos,mac  " set the ordering for file formats
 set formatoptions+=1        " when wrapping paragraphs, don't end lines with 1-letter words
 
 " Sane regular expressions, via Steve Losh
@@ -138,7 +138,6 @@ set encoding=utf-8
 set lazyredraw              " don't update the display when running macros
 set laststatus=2            " tell vim to always put a status line in, even
                             "   when there's only one window
-"set cmdheight=2             " use a status bar that is 2 rows high
 
 " }}}
 " => Vim Behavior {{{
@@ -173,22 +172,7 @@ set noerrorbells            " don't beep
 set showcmd                 " show (partial) command in the last line of the
                             "   screen; this also shows visual selection info
 set modeline                " enable modelines
-"set ttyfast                " always use a fast erminal
 set cursorline              " underline the current line, for quick orientation
-
-" Tame the quickfix window (open/close using ,f)
-nmap <silent> <leader>f :QFix<CR>
-
-command! -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-  if exists("g:qfix_win") && a:forced == 0
-    cclose
-    unlet g:qfix_win
-  else
-    copen 10
-    let g:qfix_win = bufnr("$")
-  endif
-endfunction
 
 " }}}
 " => Colors and Fonts {{{
@@ -228,19 +212,16 @@ nmap Q gqap
 " Make p in visual mode replace the selected text with the yank register
 vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
 
-" Shortcut to make
-nmap mk :make<CR>
-
 " Swap implementations of ` and ' jump to markers
-" By default, ' jums to marked line, ` jumps to the marked line and col
+" By default, ' jumps to marked line, ` jumps to the marked line and col
 nnoremap ' `
 nnoremap ` '
 
 " Use the damn hjkl keys
-" map <up> <nop>
-" map <down> <nop>
-" map <left> <nop>
-" map <right> <nop>
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
 " Remap j and k to act as expected when used on long, wrapped lines
 nnoremap j gj
@@ -316,9 +297,6 @@ nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 " Run ack fast
 nnoremap <leader>a :Ack<Space>
-
-" Creating folds for tags in HTML
-"nnoremap <leader>ft Vatzf
 
 " Reselect text that was just pasted with ,v
 nnoremap <leader>v V`]
@@ -419,12 +397,12 @@ map <leader>s? z=
 
 if has("autocmd")
   augroup css_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
   augroup end " }}}
   augroup html_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype html,html.ruby,xhtml,xml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
@@ -434,7 +412,7 @@ if has("autocmd")
     autocmd filetype html,html.ruby,xhtml,xml source ~/.vim/scripts/closetag.vim
   augroup end " }}}
   augroup javascript_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
@@ -442,7 +420,7 @@ if has("autocmd")
     autocmd filetype javascript call JavaScriptFold()
   augroup end " }}}
   augroup invisible_chars " {{{
-    au!
+    autocmd!
 
     " Show invisible characters in all of these files
     autocmd filetype vim setlocal list
@@ -452,7 +430,7 @@ if has("autocmd")
     autocmd filetype html setlocal list
   augroup end " }}}
   augroup python_files " {{{
-    au!
+    autocmd!
 
     " PEP8 compliance (set 1 tab = 4 chars explicitly, even if set
     " earlier, as it is important)
@@ -477,7 +455,7 @@ if has("autocmd")
     autocmd BufWritePost *.py call Flake8()
   augroup end " }}}
   augroup rst_files " {{{
-    au!
+    autocmd!
 
     " Auto-wrap text around 74 characters
     autocmd filetype rst setlocal textwidth=74
@@ -485,12 +463,12 @@ if has("autocmd")
     autocmd filetype rst match ErrorMsg '\%>74v.\+'
   augroup end " }}}
   augroup ruby_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
   augroup textile_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype textile set textwidth=78 wrap
 
@@ -499,7 +477,7 @@ if has("autocmd")
     autocmd filetype textile highlight link frontmatter Comment
   augroup end " }}}
   augroup vim_files " {{{
-    au!
+    autocmd!
 
     " Bind <F1> to show the keyword under the cursor
     " General help can still be entered manually, with :help
@@ -508,7 +486,7 @@ if has("autocmd")
     autocmd filetype vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
   augroup yaml_files " {{{
-    au!
+    autocmd!
 
     autocmd filetype yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
   augroup end " }}}
@@ -529,7 +507,7 @@ let g:pymode_lint_write = 0
 set cpoptions+=$            " when changing a line, don't redisplay, but put
                             " a '$' at the end during the change
 set formatoptions-=         " don't start new lines w/ comment leader on pressing 'o'
-au filetype vim set formatoptions-=o
+autocmd filetype vim set formatoptions-=o
                             " must explicitly reset for vim files
 " }}}
 " => Miscellaneous {{{
