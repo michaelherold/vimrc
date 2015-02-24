@@ -30,7 +30,7 @@ call vundle#begin()
 " Let Vundle manage Vundle - required!
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'kien/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
@@ -326,19 +326,15 @@ nnoremap <leader>v V`]
 " Gundo.vim
 nnoremap <F5> :GundoToggle<CR>
 
-" Command-T
-map <leader>gl :CommandT lib<cr>
-map <leader>gt :CommandTTag<cr>
-map <leader>f :CommandT<cr>
-map <leader>F :CommandT %%<cr>
-
 " }}}
-" => Command-T Settings {{{
+" => Ctrl-P Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:CommandTMatchWindowAtTop=1
-let g:CommandTMinHeight=2
-let g:CommandTMaxHeight=10
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_match_window = 'top,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " }}}
 " => NERDTree settings {{{
