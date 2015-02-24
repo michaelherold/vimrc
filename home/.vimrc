@@ -1,11 +1,3 @@
-" Much of this was taken from the following posts:
-"   http://amix.dk/vim/vimrc.html
-"   http://nvie.com/posts/how-i-boosted-my-vim/
-"
-" To look at:
-"
-"   http://arstechnica.com/open-source/guides/2009/05/vim-made-easy-how-to-get-your-favorite-ide-features-in-vim.ars
-
 " => Configuration {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
