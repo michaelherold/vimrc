@@ -106,9 +106,9 @@ nnoremap <C-y> 2<C-y>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set foldenable              " enable folding
-set foldcolumn=2            " add a fold column
-set foldmethod=marker       " detect triple-{ style fold markers
-set foldlevelstart=0        " start out with everything folded
+set foldmethod=indent       " fold based on the indentation level
+set foldnestmax=10          " set a max level of nested folding to 10
+set foldlevelstart=10       " start out with everything folded
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
                             " which commands trigger auto-fold
 
@@ -586,3 +586,4 @@ endfunction
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " }}}
+" vim:foldmethod=marker:foldlevel=0
