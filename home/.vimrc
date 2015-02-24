@@ -303,6 +303,12 @@ nnoremap <leader>v V`]
 " Gundo.vim
 nnoremap <F5> :GundoToggle<CR>
 
+" Remap move to [beginning/end]-of-line commands
+nnoremap B ^
+nnoremap E $
+nnoremap ^ <nop>
+nnoremap $ <nop>
+
 " }}}
 " => Ctrl-P Settings {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
