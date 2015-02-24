@@ -299,7 +299,7 @@ nnoremap <leader>a :Ack<Space>
 nnoremap <leader>v V`]
 
 " Gundo.vim
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
 
 " Remap move to [beginning/end]-of-line commands
 nnoremap B ^
