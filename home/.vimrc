@@ -49,6 +49,7 @@ Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'tpope/vim-dispatch'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'othree/html5.vim'
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -293,7 +294,7 @@ vnoremap <Space> za
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 " Run ack fast
-nnoremap <leader>a :Ack<Space>
+nnoremap <leader>a :Ag<Space>
 
 " Reselect text that was just pasted with ,v
 nnoremap <leader>v V`]
