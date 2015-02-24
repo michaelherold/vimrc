@@ -267,10 +267,8 @@ nmap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
 nnoremap n n:call PulseCursorLine()<CR>
 nnoremap N N:call PulseCursorLine()<CR>
 
-" Quickly get out of insert mode without your fingers having to leave home
-" row. (either use 'jj' or 'jk')
-inoremap jj <Esc>
-"inoremap jk <Esc>
+" Quickly get out of insert mode without moving your fingers
+inoremap jk <Esc>
 
 " Quick alignment of text
 nmap <leader>al :left<CR>
@@ -308,6 +306,9 @@ nnoremap B ^
 nnoremap E $
 nnoremap ^ <nop>
 nnoremap $ <nop>
+
+" Make a more accessible <Esc> in insert mode
+inoremap jk <Esc>
 
 " }}}
 " => Ctrl-P Settings {{{
