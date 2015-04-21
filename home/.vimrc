@@ -50,6 +50,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'jgdavey/vim-turbux'
 Plugin 'othree/html5.vim'
 Plugin 'rking/ag.vim'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 filetype plugin indent on
