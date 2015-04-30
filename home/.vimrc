@@ -303,12 +303,6 @@ nnoremap <leader>v V`]
 " Gundo.vim
 nnoremap <leader>u :GundoToggle<CR>
 
-" Remap move to [beginning/end]-of-line commands
-nnoremap B ^
-nnoremap E $
-nnoremap ^ <nop>
-nnoremap $ <nop>
-
 " Make a more accessible <Esc> in insert mode
 inoremap jk <Esc>
 
