@@ -51,6 +51,7 @@ Plugin 'jgdavey/vim-turbux'
 Plugin 'othree/html5.vim'
 Plugin 'rking/ag.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 filetype plugin indent on
