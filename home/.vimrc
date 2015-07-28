@@ -249,10 +249,10 @@ imap <C-l> <C-x><C-l>
 nmap Y y$
 
 " Yank/paste to the OS clipboard with ,y and ,p
-nmap <leader>y "+y
-nmap <leader>Y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P
+map <leader>y "+y
+map <leader>Y "+yy
+map <leader>p "+p
+map <leader>P "+P
 
 " Edit the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
