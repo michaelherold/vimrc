@@ -175,14 +175,14 @@ set foldtext=MyFoldText()
 nnoremap ; :
 
 " Avoid accidentally hitting F1
-map! <F1> <Esc>
+noremap! <F1> <Esc>
 
 " Quick closing of current window
 nnoremap <leader>q :q<CR>
 
 " Use Q for formatting the current paragraph (or visual selection)
-vmap Q gq
-nmap Q gqap
+vnoremap Q gq
+nnoremap Q gqap
 
 " Make p in visual mode replace the selected text with the yank register
 vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
@@ -193,50 +193,50 @@ nnoremap ' `
 nnoremap ` '
 
 " Use the damn hjkl keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
 " Remap j and k to act as expected when used on long, wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Tab configuration
-map <leader>tn :tabnew<cr>
-map <leader>te :tabedit<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
+noremap <leader>tn :tabnew<cr>
+noremap <leader>te :tabedit<cr>
+noremap <leader>tc :tabclose<cr>
+noremap <leader>tm :tabmove
 
 " Complete whole filenames/lines with a quicker shortcut key in insert mode
-imap <C-f> <C-x><C-f>
-imap <C-l> <C-x><C-l>
+inoremap <C-f> <C-x><C-f>
+inoremap <C-l> <C-x><C-l>
 
 " Quick yanking to the end of the line
-nmap Y y$
+nnoremap Y y$
 
 " Yank/paste to the OS clipboard with ,y and ,p
-map <leader>y "+y
-map <leader>Y "+yy
-map <leader>p "+p
-map <leader>P "+P
+noremap <leader>y "+y
+noremap <leader>Y "+yy
+noremap <leader>p "+p
+noremap <leader>P "+P
 
 " Edit the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Clears the search register
-nmap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <silent> <leader>/ :nohlsearch<CR>
 
 " Pull word under cursor into LHS of a substitute (for quick search/replace)
-nmap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
+nnoremap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
 
 " Keep search matches in the middle of the window and pulse the line when
 " moving to them
@@ -247,15 +247,15 @@ nnoremap N N:call PulseCursorLine()<CR>
 inoremap jk <Esc>
 
 " Quick alignment of text
-nmap <leader>al :left<CR>
-nmap <leader>ar :right<CR>
-nmap <leader>ac :center<CR>
+nnoremap <leader>al :left<CR>
+nnoremap <leader>ar :right<CR>
+nnoremap <leader>ac :center<CR>
 
 " Scratch
-nmap <leader><tab> :Sscratch<CR><C-W>x<C-J>
+nnoremap <leader><tab> :Sscratch<CR><C-W>x<C-J>
 
 " Sudo to write
-cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Jump to matching pairs easily, with Tab
 nnoremap <Tab> %
@@ -383,13 +383,13 @@ vnoremap > >gv
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Toggle and untoggle spell-check with <leader>ss
-map <leader>ss :setlocal spell!<cr>
+noremap <leader>ss :setlocal spell!<cr>
 
 " Sane shortcuts
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+noremap <leader>sn ]s
+noremap <leader>sp [s
+noremap <leader>sa zg
+noremap <leader>s? z=
 
 " }}}
 " => Filetype Specific Handling {{{
@@ -451,10 +451,10 @@ if has("autocmd")
     "autocmd filetype python setlocal foldmethod=expr
 
     " Python runners
-    autocmd filetype python map <buffer> <F5> :w<CR>:!python %<CR>
-    autocmd filetype python imap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
-    autocmd filetype python map <buffer> <S-F5> :w<CR>:!ipython %<CR>
-    autocmd filetype python imap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
+    autocmd filetype python noremap <buffer> <F5> :w<CR>:!python %<CR>
+    autocmd filetype python inoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
+    autocmd filetype python noremap <buffer> <S-F5> :w<CR>:!ipython %<CR>
+    autocmd filetype python inoremap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
   augroup end " }}}
   augroup rst_files " {{{
     autocmd!
