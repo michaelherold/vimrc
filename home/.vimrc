@@ -19,6 +19,35 @@ let mapleader = ","
 let g:mapleader = ","
 
 " }}}
+" => Plugins {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+Plug 'kien/ctrlp.vim'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
+Plug 'nvie/vim-flake8'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'wting/rust.vim'
+Plug 'tpope/vim-rails'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'tpope/vim-dispatch'
+Plug 'jgdavey/vim-turbux'
+Plug 'othree/html5.vim'
+Plug 'rking/ag.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+
+call plug#end()
+" }}}
 " => Editing behavior {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -501,34 +530,5 @@ function! <SID>StripTrailingWhitespace()
   call cursor(l, c)
 endfunction
 
-" }}}
-" => Plugins {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
-
-Plug 'kien/ctrlp.vim'
-Plug 'sjl/gundo.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-surround'
-Plug 'bling/vim-airline'
-Plug 'vim-ruby/vim-ruby'
-Plug 'slim-template/vim-slim'
-Plug 'nvie/vim-flake8'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'wting/rust.vim'
-Plug 'tpope/vim-rails'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'tpope/vim-dispatch'
-Plug 'jgdavey/vim-turbux'
-Plug 'othree/html5.vim'
-Plug 'rking/ag.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
-
-call plug#end()
 " }}}
 " vim:foldmethod=marker:foldlevel=0
