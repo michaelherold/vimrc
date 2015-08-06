@@ -33,6 +33,7 @@ Plug 'nvie/vim-flake8'
 Plug 'othree/html5.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -288,6 +289,7 @@ inoremap jk <Esc>
     let g:airline_symbols = {}
   endif
   let g:airline_symbols.space = "\ua0"
+  let g:airline#extensions#syntastic#enabled = 1
 
   " }}}
   " => Ctrl-P Settings {{{
@@ -300,7 +302,7 @@ inoremap jk <Esc>
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
   " }}}
-  " => NERDTree settings {{{
+  " => NERDTree Settings {{{
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   nnoremap <leader>n :NERDTreeToggle<CR>
@@ -328,6 +330,20 @@ inoremap jk <Esc>
   " Don't display these kinds of files
   let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
                       \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+
+  " }}}
+  " => Syntastic Settings {{{
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  augroup syntastic_config
+    autocmd!
+
+    let g:syntastic_error_symbol = '✗'
+    let g:syntastic_warning_symbol = '⚠'
+
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+  augroup END
 
   " }}}
 " }}}
