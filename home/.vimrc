@@ -43,6 +43,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
 Plug 'wting/rust.vim'
 
@@ -344,6 +345,17 @@ inoremap jk <Esc>
 
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+  augroup END
+
+  " }}}
+  " => UltiSnips Settings {{{
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  augroup ultisnips_config
+    autocmd!
+
+    " Work around YouCompleteMe
+    let g:UltiSnipsExpandTrigger='<c-j>'
   augroup END
 
   " }}}
