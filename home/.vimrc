@@ -1,4 +1,4 @@
-" => Configuration {{{
+" => General {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use vim settings, rather than vi settings (much better!)
@@ -13,48 +13,6 @@ let s:cache_dir = '~/.vim/cache'
 function! s:get_cache_dir(suffix)
   return resolve(expand(s:cache_dir . '/' . a:suffix))
 endfunction
-
-" }}}
-" => General {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Use Vundle to manage plugins, see http://github.com/gmarik/Vundle.vim
-
-" Turn off filetype for Vundle
-filetype off
-
-" Set the runtime pathto include Vundle and initialize
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Let Vundle manage Vundle - required!
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'kien/ctrlp.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'slim-template/vim-slim'
-Plugin 'nvie/vim-flake8'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'wting/rust.vim'
-Plugin 'tpope/vim-rails'
-Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'tpope/vim-dispatch'
-Plugin 'jgdavey/vim-turbux'
-Plugin 'othree/html5.vim'
-Plugin 'rking/ag.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'christoomey/vim-tmux-navigator'
-
-call vundle#end()
-filetype plugin indent on
 
 " Set leader to ','
 let mapleader = ","
@@ -543,5 +501,34 @@ function! <SID>StripTrailingWhitespace()
   call cursor(l, c)
 endfunction
 
+" }}}
+" => Plugins {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+Plug 'kien/ctrlp.vim'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
+Plug 'nvie/vim-flake8'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'wting/rust.vim'
+Plug 'tpope/vim-rails'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'tpope/vim-dispatch'
+Plug 'jgdavey/vim-turbux'
+Plug 'othree/html5.vim'
+Plug 'rking/ag.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+
+call plug#end()
 " }}}
 " vim:foldmethod=marker:foldlevel=0
