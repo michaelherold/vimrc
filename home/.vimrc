@@ -286,52 +286,66 @@ inoremap jk <Esc>
   " => Airline Settings {{{
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  let g:airline_powerline_fonts = 1
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline_symbols.space = "\ua0"
-  let g:airline#extensions#syntastic#enabled = 1
+  augroup airline_config
+    autocmd!
+
+    let g:airline_powerline_fonts = 1
+
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.space = "\ua0"
+
+    let g:airline#extensions#syntastic#enabled = 1
+  augroup END
 
   " }}}
   " => Ctrl-P Settings {{{
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  let g:ctrlp_map = '<leader>f'
-  let g:ctrlp_match_window = 'top,order:ttb'
-  let g:ctrlp_switch_buffer = 0
-  let g:ctrlp_working_path_mode = 0
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  augroup ctrlp_config
+    autocmd!
+
+    let g:ctrlp_map = '<leader>f'
+    let g:ctrlp_match_window = 'top,order:ttb'
+    let g:ctrlp_switch_buffer = 0
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    let g:ctrlp_working_path_mode = 0
+  augroup END
 
   " }}}
   " => NERDTree Settings {{{
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  nnoremap <leader>n :NERDTreeToggle<CR>
+  augroup nerdtree_config
+    autocmd!
 
-  " Store the bookmarks file
-  let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+    nnoremap <leader>n :NERDTreeToggle<CR>
 
-  " Show the bookmarks table on startup
-  let NERDTreeShowBookmarks=1
+    " Store the bookmarks file
+    let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
 
-  " Show hidden files too
-  let NERDTreeShowFiles=1
-  let NERDTreeShowHidden=1
+    " Show the bookmarks table on startup
+    let NERDTreeShowBookmarks=1
 
-  " Quit on opening files from the tree
-  let NERDTreeQuitOnOpen=1
+    " Show hidden files too
+    let NERDTreeShowFiles=1
+    let NERDTreeShowHidden=1
 
-  " Highlight the selected entry in the tree
-  let NERDTreeHighlightCursorline=1
+    " Quit on opening files from the tree
+    let NERDTreeQuitOnOpen=1
 
-  " Use a single click to fold/unfold directories and a double click to
-  " open files
-  let NERDTreeMouseMouse=2
+    " Highlight the selected entry in the tree
+    let NERDTreeHighlightCursorline=1
 
-  " Don't display these kinds of files
-  let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-                      \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+    " Use a single click to fold/unfold directories and a double click to
+    " open files
+    let NERDTreeMouseMouse=2
+
+    " Don't display these kinds of files
+    let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+                        \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+  augroup END
 
   " }}}
   " => Syntastic Settings {{{
