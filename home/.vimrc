@@ -92,6 +92,7 @@ set lazyredraw              " don't update the display when running macros
 set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " set chars used for whitespace
 set modeline                " enable modelines
 set mouse=a                 " enable using the mouse if terminal emulator supports it
+set nobackup                " backup really acts weirdly ... disable it!
 set noerrorbells            " don't beep
 set nojoinspaces            " only insert space in join after punctuation
 set nolist                  " don't show invisible characters by default
