@@ -280,6 +280,10 @@ nnoremap <leader>u :GundoToggle<CR>
 " Make a more accessible <Esc> in insert mode
 inoremap jk <Esc>
 
+" Make > and < in visual mode return to visual mode after finishing
+vnoremap < <gv
+vnoremap > >gv
+
 " }}}
 " => Plugin Configuration {{{
   " => Airline Settings {{{
