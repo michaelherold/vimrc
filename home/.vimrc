@@ -397,6 +397,11 @@ if has("autocmd")
 
     autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
   augroup end " }}}
+  augroup git_messages " {{{
+    autocmd!
+
+    autocmd filetype gitcommit setlocal spell! spelllang=en_us
+  augroup end " }}}
   augroup html_files " {{{
     autocmd!
 
