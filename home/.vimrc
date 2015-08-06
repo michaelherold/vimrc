@@ -48,38 +48,85 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 " }}}
-" => Editing behavior {{{
+" => Colors and Fonts {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set showmode                " always show what mode we're in
-set nowrap                  " don't wrap lines
-set tabstop=2               " a tab is two spaces
-set softtabstop=2           " when hitting <BS>, pretend like tab is removed, even if spaces
-set expandtab               " expand tabs by default (overloadable per file type)
-set shiftwidth=2            " number of spaces to use for auto indenting
-set shiftround              " use multiple of shiftwidth when indenting with '>' and '<'
-set smarttab                " insert tabs on line start according to shiftwidth
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set t_Co=256
+set background=dark
+syntax on  " switch syntax highlighting on for color term
+let base16colorspace=256
+colorscheme base16-railscasts
+
+" }}}
+" => Editing Behavior {{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+set undodir=~/.vim/undo
+
 set autoindent              " always set autoindenting on
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set copyindent              " copy the previous indentation on autoindenting
-set number                  " always show line numbers
-set ruler                   " show location on command line
-set showmatch               " set show matching parentheses
-set ignorecase              " ignore case when searching
-set smartcase               " ignore case only if search pattern all lowercase
-set scrolloff=4             " keep 4 lines off the edges of the screen when scrolling
-set virtualedit=block       " allow cursor to go in to 'invalid' places
-set hlsearch                " highlight search terms
-set incsearch               " show search matches as you type
-set gdefault                " search/replace 'globally' by default
-
-set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " set chars used for whitespace
-set nolist                  " don't show invisible characters by default
-
-set mouse=a                 " enable using the mouse if terminal emulator supports it
-
+set cursorline              " underline the current line, for quick orientation
+set encoding=utf-8 nobomb   " UTF-8 by default without BOM
+set expandtab               " expand tabs by default (overloadable per file type)
 set fileformats=unix,dos,mac  " set the ordering for file formats
 set formatoptions+=1        " when wrapping paragraphs, don't end lines with 1-letter words
+set formatoptions+=2        " use indent from 2nd line of a paragraph
+set formatoptions+=c        " format comments
+set formatoptions+=l        " don't break lines that are already long
+set formatoptions+=n        " recognize numbered lines
+set formatoptions+=o        " make comment when using o or O from comment line
+set formatoptions+=q        " recognize comments with gq
+set formatoptions+=r        " continue comments by default
+set formatoptions=
+set gdefault                " search/replace 'globally' by default
+set hidden                  " hide buffers instead of closing them
+set history=1000            " remember more commands and search history
+set hlsearch                " highlight search terms
+set ignorecase              " ignore case when searching
+set incsearch               " show search matches as you type
+set laststatus=2            " tell vim to always put a status line in
+set lazyredraw              " don't update the display when running macros
+set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " set chars used for whitespace
+set modeline                " enable modelines
+set mouse=a                 " enable using the mouse if terminal emulator supports it
+set noerrorbells            " don't beep
+set nojoinspaces            " only insert space in join after punctuation
+set nolist                  " don't show invisible characters by default
+set noshowmode              " don't show the current mode since we have airline
+set nostartofline           " don't reset cursor to start of line when moving around
+set nowrap                  " don't wrap lines
+set number                  " always show line numbers
+set ruler                   " show location on command line
+set scrolloff=4             " keep 4 lines off the edges of the screen when scrolling
+set shiftround              " use multiple of shiftwidth when indenting with '>' and '<'
+set shiftwidth=2            " number of spaces to use for auto indenting
+set showcmd                 " show (partial) command in the last line of the screen
+set showmatch               " set show matching parentheses
+set showmode                " always show what mode we're in
+set smartcase               " ignore case only if search pattern all lowercase
+set smarttab                " insert tabs on line start according to shiftwidth
+set softtabstop=2           " when hitting <BS>, pretend like tab is removed, even if spaces
+set switchbuf=useopen       " reveal already opened files from quickfix
+set tabstop=2               " a tab is two spaces
+set termencoding=utf-8
+set title                   " change the terminal's title
+set undofile                " keep a persistent backup file
+set undolevels=1000         " use many mucho levels of undo
+set viminfo=%,'9999,s512,n~/.vim/viminfo " Restore buffer links, remember 9999 files of marks, remember registers <= 512kb
+set virtualedit=block       " allow cursor to go in to 'invalid' places
+set visualbell              " don't beep
+set wildignore+=*.swp,*.bak,*.pyc,*.class
+set wildignore+=*/.git/*
+set wildignore+=*/bower_components/*,*/node_modules/*
+set wildignore+=bundle/**,vendor/bundle/**
+set wildignore+=coverage/*
+set wildignore+=tmp/**,*.rbc,*.rbx,*.scssc,*.sassc
+set wildmenu                " make tab completion for files/buffer bash-like
+set wildmode=list:longest   " complete only to the point of ambiguity
+set wrapscan
 
 " Sane regular expressions, via Steve Losh
 " See http://stevelosh.com/blog/2010/09/coming-home-to-vim
@@ -91,13 +138,14 @@ nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
 " }}}
-" => Folding rules {{{
+" => Folding Rules {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set foldenable              " enable folding
-set foldmethod=indent       " fold based on the indentation level
-set foldnestmax=10          " set a max level of nested folding to 10
 set foldlevelstart=10       " start out with everything folded
+set foldmethod=syntax       " fold based on the syntax
+set foldminlines=0
+set foldnestmax=10          " set a max level of nested folding to 10
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
                             " which commands trigger auto-fold
 
@@ -117,69 +165,6 @@ function! MyFoldText()
   return line . ' …' . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction
 set foldtext=MyFoldText()
-
-" }}}
-" => Editor layout {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set termencoding=utf-8
-set encoding=utf-8
-set lazyredraw              " don't update the display when running macros
-set laststatus=2            " tell vim to always put a status line in, even
-                            "   when there's only one window
-
-" }}}
-" => Vim Behavior {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set hidden                  " hide buffers instead of closing them
-set switchbuf=useopen       " reveal already opened files from quickfix
-                            "   instead of opening new buffers
-set history=1000            " remember more commands and search history
-set undolevels=1000         " use many mucho levels of undo
-if v:version >= 730
-  set undofile              " keep a persistent backup file
-  set undodir=~/.vim/.undo,~/tmp,/tmp
-endif
-set nobackup                " do not want backup files!!!!!
-set noswapfile              " NO SWAP FILE
-set directory=~/.vim/.tmp,~/tmp,/tmp " set swap location, just in case
-set viminfo='20,\"80        " read/write a .viminfo file, don't store more
-                            "   than 80 lines of registers
-set wildmenu                " make tab completion for files/buffer bash-like
-set wildmode=list:full      " show a list when pressing tab and complete
-                            "   first full match
-set wildignore+=*.swp,*.bak,*.pyc,*.class
-set wildignore+=tmp/**,*.rbc,*.rbx,*.scssc,*.sassc
-set wildignore+=bundle/**,vendor/bundle/**
-set wildignore+=coverage/**
-set wildignore+=node_modules/**
-
-set title                   " change the terminal's title
-set visualbell              " don't beep
-set noerrorbells            " don't beep
-set showcmd                 " show (partial) command in the last line of the
-                            "   screen; this also shows visual selection info
-set modeline                " enable modelines
-set cursorline              " underline the current line, for quick orientation
-
-" }}}
-" => Colors and Fonts {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if &t_Co > 2 || has("gui_running")
-  syntax on  " switch syntax highlighting on for color term
-endif
-
-set background=dark
-let base16colorspace=256
-colorscheme base16-railscasts
-
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
 
 " }}}
 " => Shortcut Mappings {{{
@@ -295,47 +280,59 @@ nnoremap <leader>u :GundoToggle<CR>
 inoremap jk <Esc>
 
 " }}}
-" => Ctrl-P Settings {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Configuration {{{
+  " => Airline Settings {{{
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_match_window = 'top,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:airline_powerline_fonts = 1
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_symbols.space = "\ua0"
 
+  " }}}
+  " => Ctrl-P Settings {{{
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  let g:ctrlp_map = '<leader>f'
+  let g:ctrlp_match_window = 'top,order:ttb'
+  let g:ctrlp_switch_buffer = 0
+  let g:ctrlp_working_path_mode = 0
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+  " }}}
+  " => NERDTree settings {{{
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  nnoremap <leader>n :NERDTreeToggle<CR>
+
+  " Store the bookmarks file
+  let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+
+  " Show the bookmarks table on startup
+  let NERDTreeShowBookmarks=1
+
+  " Show hidden files too
+  let NERDTreeShowFiles=1
+  let NERDTreeShowHidden=1
+
+  " Quit on opening files from the tree
+  let NERDTreeQuitOnOpen=1
+
+  " Highlight the selected entry in the tree
+  let NERDTreeHighlightCursorline=1
+
+  " Use a single click to fold/unfold directories and a double click to
+  " open files
+  let NERDTreeMouseMouse=2
+
+  " Don't display these kinds of files
+  let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+                      \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+
+  " }}}
 " }}}
-" => NERDTree settings {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <leader>n :NERDTreeToggle<CR>
-
-" Store the bookmarks file
-let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
-
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
-
-" Show hidden files too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-
-" Quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
-
-" Use a single click to fold/unfold directories and a double click to
-" open files
-let NERDTreeMouseMouse=2
-
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-                    \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
-
-" }}}
-" => Spell checking {{{
+" => Spell Checking {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Toggle and untoggle spell-check with <leader>ss
@@ -454,22 +451,13 @@ if has("autocmd")
 endif
 
 " }}}
-" => Python mode configuration {{{
+" => Python Mode Configuration {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Don't run pylint on every save - handled by Flake8
 let g:pymode_lint = 0
 let g:pymode_lint_write = 0
 
-" }}}
-" => Extra vi Compatibility {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set cpoptions+=$            " when changing a line, don't redisplay, but put
-                            " a '$' at the end during the change
-set formatoptions-=         " don't start new lines w/ comment leader on pressing 'o'
-autocmd filetype vim set formatoptions-=o
-                            " must explicitly reset for vim files
 " }}}
 " => Miscellaneous {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
