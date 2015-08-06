@@ -29,7 +29,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'nelstrom/vim-markdown-folding'
-Plug 'nvie/vim-flake8'
 Plug 'othree/html5.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -359,6 +358,8 @@ inoremap jk <Esc>
 
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+
+    let g:syntastic_python_checkers = ['flake8']
   augroup END
 
   " }}}
@@ -445,9 +446,6 @@ if has("autocmd")
     autocmd filetype python imap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
     autocmd filetype python map <buffer> <S-F5> :w<CR>:!ipython %<CR>
     autocmd filetype python imap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
-
-    " Run a quick static syntax check every time we save a Python file
-    autocmd BufWritePost *.py call Flake8()
   augroup end " }}}
   augroup rst_files " {{{
     autocmd!
