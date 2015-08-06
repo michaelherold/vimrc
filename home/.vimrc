@@ -90,6 +90,7 @@ set incsearch               " show search matches as you type
 set laststatus=2            " tell vim to always put a status line in
 set lazyredraw              " don't update the display when running macros
 set listchars=tab:▸\ ,trail:·,extends:#,nbsp:· " set chars used for whitespace
+set magic                   " change the way backslahes are used in search patterns
 set modeline                " enable modelines
 set mouse=a                 " enable using the mouse if terminal emulator supports it
 set nobackup                " backup really acts weirdly ... disable it!
