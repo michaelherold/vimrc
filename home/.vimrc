@@ -5,6 +5,8 @@
 " Must be first, because it changes other options as a side effect
 set nocompatible
 
+set shell=/bin/bash
+
 fun! MySys()
   return "linux"
 endfun
