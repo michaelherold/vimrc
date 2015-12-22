@@ -32,6 +32,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'elixir-lang/vim-elixir'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5.vim'
 Plug 'rking/ag.vim'
@@ -287,6 +288,10 @@ inoremap jk <Esc>
 " Make > and < in visual mode return to visual mode after finishing
 vnoremap < <gv
 vnoremap > >gv
+
+" Easy alignment
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " }}}
 " => Plugin Configuration {{{
