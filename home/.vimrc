@@ -7,18 +7,9 @@ set nocompatible
 
 set shell=/bin/bash
 
-fun! MySys()
-  return "linux"
-endfun
-
-let s:cache_dir = '~/.vim/cache'
-function! s:get_cache_dir(suffix)
-  return resolve(expand(s:cache_dir . '/' . a:suffix))
-endfunction
-
-" Set leader to ','
-let mapleader = ","
-let g:mapleader = ","
+" Set leader to ' '
+let mapleader = " "
+let g:mapleader = " "
 
 " }}}
 " => Plugins {{{
@@ -26,18 +17,23 @@ let g:mapleader = ","
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
+Plug 'digitaltoad/vim-pug'
 Plug 'elixir-lang/vim-elixir'
-Plug 'jelera/vim-javascript-syntax'
+Plug 'elmcast/elm-vim'
+Plug 'gregsexton/MatchTag', { 'for': 'html' }
+Plug 'isRuslan/vim-es6'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'nicklasos/vim-jsx-riot'
 Plug 'othree/html5.vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'rhysd/vim-crystal'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'sjl/gundo.vim'
@@ -45,11 +41,17 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
+Plug 'wavded/vim-stylus'
 Plug 'wting/rust.vim'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 " }}}
@@ -66,12 +68,9 @@ colorscheme base16-railscasts
 " => Editing Behavior {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
-
 set autoindent              " always set autoindenting on
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set autowrite               " automatically :write before running commands
+set backspace=2             " allow backspacing over everything in insert mode
 set copyindent              " copy the previous indentation on autoindenting
 set cursorline              " underline the current line, for quick orientation
 set encoding=utf-8 nobomb   " UTF-8 by default without BOM
@@ -88,7 +87,7 @@ set formatoptions+=r        " continue comments by default
 set formatoptions=
 set gdefault                " search/replace 'globally' by default
 set hidden                  " hide buffers instead of closing them
-set history=1000            " remember more commands and search history
+set history=50              " remember more commands and search history
 set hlsearch                " highlight search terms
 set ignorecase              " ignore case when searching
 set incsearch               " show search matches as you type
@@ -104,7 +103,9 @@ set nojoinspaces            " only insert space in join after punctuation
 set nolist                  " don't show invisible characters by default
 set noshowmode              " don't show the current mode since we have airline
 set nostartofline           " don't reset cursor to start of line when moving around
+set noswapfile
 set nowrap                  " don't wrap lines
+set nowritebackup
 set number                  " always show line numbers
 set ruler                   " show location on command line
 set scrolloff=4             " keep 4 lines off the edges of the screen when scrolling
@@ -267,10 +268,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 nnoremap <Tab> %
 vnoremap <Tab> %
 
-" Folding
-nnoremap <Space> za
-vnoremap <Space> za
-
 " Strip all trailing whitespace from a file, using ,W
 nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
@@ -294,6 +291,9 @@ vnoremap > >gv
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" Writing mode
+noremap <leader>G :Goyo<CR>
+
 " }}}
 " => Plugin Configuration {{{
   " => Airline Settings {{{
@@ -302,12 +302,10 @@ nmap ga <Plug>(EasyAlign)
   augroup airline_config
     autocmd!
 
+    let g:airline_left_step=''
     let g:airline_powerline_fonts = 1
-
-    if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-    endif
-    let g:airline_symbols.space = "\ua0"
+    let g:airline_right_step=''
+    let g:airline_theme = 'base16'
 
     let g:airline#extensions#syntastic#enabled = 1
   augroup END
@@ -322,7 +320,8 @@ nmap ga <Plug>(EasyAlign)
     let g:ctrlp_map = '<leader>f'
     let g:ctrlp_match_window = 'top,order:ttb'
     let g:ctrlp_switch_buffer = 0
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    let g:ctrlp_use_caching = 0
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
     let g:ctrlp_working_path_mode = 0
   augroup END
 
@@ -388,6 +387,29 @@ nmap ga <Plug>(EasyAlign)
   augroup END
 
   " }}}
+  " => Writing Settings {{{
+  augroup writing
+    autocmd!
+
+    let g:limelight_paragraph_span = 1
+    let g:limelight_priority = -1
+
+    function! s:goyo_enter()
+      set linebreak
+      set wrap
+      Limelight
+    endfunction
+
+    function! s:goyo_leave()
+      set nolinebreak
+      set nowrap
+      Limelight!
+    endfunction
+
+    autocmd User GoyoEnter call <SID>goyo_enter()
+    autocmd User GoyoLeave call <SID>goyo_leave()
+  augroup end
+  " }}}
 " }}}
 " => Spell Checking {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,6 +432,11 @@ if has("autocmd")
     autocmd!
 
     autocmd filetype css,less,scss setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 foldmethod=marker foldmarker={,}
+  augroup end " }}}
+  augroup elm_files " {{{
+    autocmd!
+
+    autocmd filetype elm setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
   augroup end " }}}
   augroup git_messages " {{{
     autocmd!
@@ -443,6 +470,12 @@ if has("autocmd")
     autocmd filetype ruby setlocal list
     autocmd filetype javascript,css setlocal list
     autocmd filetype html setlocal list
+  augroup end " }}}
+  augroup php_files " {{{
+    autocmd!
+
+    autocmd filetype php setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+    autocmd filetype php setlocal textwidth=120
   augroup end " }}}
   augroup python_files " {{{
     autocmd!
@@ -521,8 +554,11 @@ let g:pymode_lint_write = 0
 " => Miscellaneous {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Restore cursor position upon reopening files
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+" Restore cursor position upon reopening files, except for gitcommits
+autocmd BufReadPost *
+  \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+  \  exe "normal! g`\"" |
+  \ endif
 
 " Common abbreviations/misspellings
 source ~/.vim/autocorrect.vim
